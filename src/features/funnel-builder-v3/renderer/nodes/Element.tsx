@@ -21,6 +21,11 @@ import { CheckoutPaymentMockup } from "../../elements/checkout/CheckoutPaymentMo
 import { CheckoutPaymentRuntime } from "../../elements/checkout/CheckoutPaymentRuntime";
 import { CheckoutBumpMockup } from "../../elements/checkout/CheckoutBumpMockup";
 import { CheckoutButtonMockup } from "../../elements/checkout/CheckoutButtonMockup";
+import { HeroMockup } from "../../elements/website/HeroMockup";
+import { NavbarMockup } from "../../elements/website/NavbarMockup";
+import { FooterMockup } from "../../elements/website/FooterMockup";
+import { FeatureGridMockup } from "../../elements/website/FeatureGridMockup";
+import { CTASectionMockup } from "../../elements/website/CTASectionMockup";
 
 const SHADOW: Record<string, string> = {
   none: "none",
@@ -680,6 +685,25 @@ export function Element({ node }: { node: ElementNode }) {
 
       case "checkout.button":
         return <CheckoutButtonMockup props={node.props} />;
+
+      // Website Elements
+      case "hero":
+      case "hero.centered":
+      case "hero.split":
+      case "hero.fullwidth":
+        return <HeroMockup props={node.props} />;
+
+      case "navbar":
+        return <NavbarMockup props={node.props} />;
+
+      case "footer":
+        return <FooterMockup props={node.props} />;
+
+      case "feature-grid":
+        return <FeatureGridMockup props={node.props} />;
+
+      case "cta-section":
+        return <CTASectionMockup props={node.props} />;
 
       case "stepIndicator":
         return (

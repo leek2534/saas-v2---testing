@@ -16,6 +16,13 @@ import {
   ArrowRight,
   BarChart3,
   Search,
+  Globe,
+  Menu,
+  Zap,
+  Target,
+  Clock,
+  Users,
+  Award,
 } from "lucide-react";
 import { useFunnelEditorStore } from "../../store/store";
 import { cn } from "@/lib/utils";
@@ -85,6 +92,14 @@ export function ElementsTab() {
     { kind: "checkout.button", label: "Button", icon: <ArrowRight size={14} /> },
   ];
 
+  const websiteElements = [
+    { kind: "hero", label: "Hero", icon: <Globe size={14} /> },
+    { kind: "navbar", label: "Navbar", icon: <Menu size={14} /> },
+    { kind: "footer", label: "Footer", icon: <Menu size={14} /> },
+    { kind: "feature-grid", label: "Features", icon: <Zap size={14} /> },
+    { kind: "cta-section", label: "CTA", icon: <Target size={14} /> },
+  ];
+
   const marketingElements = [
     { kind: "button", label: "Button", icon: <Square size={14} /> },
     { kind: "checkout", label: "Checkout", icon: <CreditCard size={14} /> },
@@ -152,6 +167,18 @@ export function ElementsTab() {
           </div>
           <div className="mt-2 text-xs text-blue-600">
             Build custom checkout flows
+          </div>
+        </CategorySection>
+
+        {/* Website Elements */}
+        <CategorySection
+          id="website"
+          label="Website"
+          icon={Globe}
+          defaultOpen={true}
+        >
+          <div className="grid grid-cols-2 gap-2">
+            {websiteElements.map((el) => elementButton(el.kind, el.label, el.icon))}
           </div>
         </CategorySection>
 

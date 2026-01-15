@@ -140,7 +140,6 @@ export const HERO_TEMPLATES: Template[] = [
                 kind: 'image',
                 src: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=600&fit=crop',
                 alt: 'Dashboard Preview',
-                maxWidth: 900,
                 borderRadius: 16,
                 objectFit: 'cover',
                 aspectRatio: '16/9',
@@ -262,7 +261,6 @@ export const HERO_TEMPLATES: Template[] = [
                   kind: 'image',
                   src: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop',
                   alt: 'Product Dashboard',
-                  maxWidth: 600,
                   borderRadius: 16,
                   objectFit: 'cover',
                   aspectRatio: '4/3',
@@ -330,7 +328,6 @@ export const HERO_TEMPLATES: Template[] = [
                 textAlign: 'center',
                 color: 'rgba(255, 255, 255, 0.9)',
                 lineHeight: 1.6,
-                maxWidth: 800,
                 gapToNext: 40,
               }
             },

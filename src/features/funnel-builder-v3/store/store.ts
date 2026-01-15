@@ -352,6 +352,7 @@ export type FunnelEditorState = {
   addColumn: () => void;
   addElement: (kind: ElementNode["props"]["kind"]) => void;
   addElementBelow: (kind: ElementNode["props"]["kind"]) => void;
+  insertTemplate: (structure: any) => void;
   duplicateElement: (elementId: string) => void;
   updateNode: (nodeId: string, patch: Partial<AnyNode>) => void;
   updateNodeProps: (nodeId: string, propsPatch: Record<string, any>) => void;
@@ -1299,6 +1300,94 @@ export const useFunnelEditorStore = create<FunnelEditorState>((set, get) => {
       const nextTree = insertNode(element, { parentId: columnId, index: insertIndex });
       set({ tree: nextTree });
       get().select(elId, { reason: "system" });
+    },
+
+    insertTemplate: (structure) => {
+      const { tree } = get();
+      const newNodes = { ...tree.nodes };
+      const newPageRootIds = [...tree.pageRootIds];
+
+      // Recursive function to create nodes from template structure
+      function createNode(template: any, parentId?: string): string {
+        const nodeId = id("tpl");
+
+        if (template.type === 'section') {
+          const section: SectionNode = {
+            id: nodeId,
+            type: 'section',
+            parentId: null,
+            props: template.props || {},
+            children: []
+          };
+
+          // Create children
+          if (template.children && section.children) {
+            template.children.forEach((child: any) => {
+              const childId = createNode(child, nodeId);
+              section.children!.push(childId);
+            });
+          }
+
+          newNodes[nodeId] = section;
+          newPageRootIds.push(nodeId);
+
+        } else if (template.type === 'row') {
+          const row: RowNode = {
+            id: nodeId,
+            type: 'row',
+            parentId: parentId!,
+            props: template.props || {},
+            children: []
+          };
+
+          if (template.children && row.children) {
+            template.children.forEach((child: any) => {
+              const childId = createNode(child, nodeId);
+              row.children!.push(childId);
+            });
+          }
+
+          newNodes[nodeId] = row;
+
+        } else if (template.type === 'column') {
+          const column: ColumnNode = {
+            id: nodeId,
+            type: 'column',
+            parentId: parentId!,
+            props: template.props || {},
+            children: []
+          };
+
+          if (template.children && column.children) {
+            template.children.forEach((child: any) => {
+              const childId = createNode(child, nodeId);
+              column.children!.push(childId);
+            });
+          }
+
+          newNodes[nodeId] = column;
+
+        } else if (template.type === 'element') {
+          const element: ElementNode = {
+            id: nodeId,
+            type: 'element',
+            parentId: parentId!,
+            props: template.props
+          };
+
+          newNodes[nodeId] = element;
+        }
+
+        return nodeId;
+      }
+
+      // Create all nodes from template
+      const rootId = createNode(structure);
+
+      set({ 
+        tree: { ...tree, nodes: newNodes, pageRootIds: newPageRootIds },
+        selectedId: rootId
+      });
     },
 
     duplicateElement: (elementId) => {

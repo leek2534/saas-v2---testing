@@ -24,18 +24,60 @@ export const HERO_TEMPLATES: Template[] = [
     description: 'Clean centered hero with headline, description, and image below',
     tags: ['hero', 'centered', 'simple'],
     structure: {
-      type: 'element',
+      type: 'section',
       props: {
-        kind: 'hero',
-        layout: 'centered',
-        headline: 'Build Amazing Funnels That Convert',
-        subheadline: 'The Complete Solution',
-        description: 'Create high-converting sales funnels, landing pages, and checkout experiences in minutes.',
-        buttons: [
-          { text: 'Get Started', link: '#', style: 'primary' },
-          { text: 'Watch Demo', link: '#', style: 'secondary' },
-        ],
+        background: '#ffffff',
+        padding: { top: 80, bottom: 80, left: 20, right: 20 },
+        maxWidth: 1200,
       },
+      children: [{
+        type: 'row',
+        props: { gap: 16, verticalAlign: 'top' },
+        children: [{
+          type: 'column',
+          props: { width: 'auto' },
+          children: [
+            {
+              type: 'element',
+              props: {
+                kind: 'heading',
+                content: { type: 'doc', content: [{ type: 'paragraph', content: [{ type: 'text', text: 'Build Amazing Funnels That Convert' }] }] },
+                fontSize: 48,
+                textAlign: 'center',
+                fontWeight: 700,
+                color: '#111827',
+              }
+            },
+            {
+              type: 'element',
+              props: {
+                kind: 'paragraph',
+                content: { type: 'doc', content: [{ type: 'paragraph', content: [{ type: 'text', text: 'Create high-converting sales funnels, landing pages, and checkout experiences in minutes.' }] }] },
+                fontSize: 18,
+                textAlign: 'center',
+                color: '#6B7280',
+              }
+            },
+            {
+              type: 'element',
+              props: {
+                kind: 'button',
+                text: 'Get Started',
+                href: '#',
+                style: {
+                  background: '#3B82F6',
+                  color: '#ffffff',
+                  paddingY: 14,
+                  paddingX: 28,
+                  borderRadius: 8,
+                  fontSize: 16,
+                  fontWeight: 600,
+                },
+              }
+            }
+          ]
+        }]
+      }]
     },
   },
   {

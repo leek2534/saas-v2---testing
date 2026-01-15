@@ -7,28 +7,17 @@ import { HERO_TEMPLATES, NAVBAR_TEMPLATES, FOOTER_TEMPLATES, FEATURE_TEMPLATES, 
 import { useFunnelEditorStore } from "../../store/store";
 
 export function BlocksTab() {
-  const addElement = useFunnelEditorStore((s) => s.addElement);
-  const tree = useFunnelEditorStore((s) => s.tree);
-  const selectedId = useFunnelEditorStore((s) => s.selectedId);
-
-  const selectedNode = selectedId ? tree.nodes[selectedId] : undefined;
-  const canAddElement = selectedNode?.type === "column" || selectedNode?.type === "element";
+  const insertTemplate = useFunnelEditorStore((s) => s.insertTemplate);
 
   const handleInsertTemplate = (templateStructure: any) => {
-    if (!canAddElement) return;
-    // For now, just add the element with the template props
-    if (templateStructure.type === 'element') {
-      addElement(templateStructure.props.kind);
-      // TODO: Update element props after insertion with template data
-    }
+    insertTemplate(templateStructure);
   };
 
   const renderTemplateButton = (template: any) => (
     <button
       key={template.id}
       onClick={() => handleInsertTemplate(template.structure)}
-      disabled={!canAddElement}
-      className="w-full text-left p-3 rounded-lg border border-slate-200 hover:border-blue-300 hover:bg-blue-50 transition-all disabled:opacity-40 disabled:cursor-not-allowed"
+      className="w-full text-left p-3 rounded-lg border border-slate-200 hover:border-blue-300 hover:bg-blue-50 transition-all"
     >
       <div className="flex items-start gap-3">
         <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center">
@@ -45,11 +34,6 @@ export function BlocksTab() {
   return (
     <div className="flex flex-col h-full">
       <div className="flex-1 overflow-y-auto p-4 space-y-3">
-        {!canAddElement && (
-          <div className="text-xs text-slate-500 bg-amber-50 border border-amber-200 rounded-lg p-3 mb-3">
-            Select a column to insert templates
-          </div>
-        )}
 
         {/* Website Templates */}
         <CategorySection

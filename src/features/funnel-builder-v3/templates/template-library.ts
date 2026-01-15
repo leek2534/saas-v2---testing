@@ -36,46 +36,27 @@ export const HERO_TEMPLATES: Template[] = [
         children: [{
           type: 'column',
           props: { width: 'auto' },
-          children: [
-            {
-              type: 'element',
-              props: {
-                kind: 'heading',
-                content: { type: 'doc', content: [{ type: 'paragraph', content: [{ type: 'text', text: 'Build Amazing Funnels That Convert' }] }] },
-                fontSize: 48,
-                textAlign: 'center',
-                fontWeight: 700,
-                color: '#111827',
-              }
-            },
-            {
-              type: 'element',
-              props: {
-                kind: 'paragraph',
-                content: { type: 'doc', content: [{ type: 'paragraph', content: [{ type: 'text', text: 'Create high-converting sales funnels, landing pages, and checkout experiences in minutes.' }] }] },
-                fontSize: 18,
-                textAlign: 'center',
-                color: '#6B7280',
-              }
-            },
-            {
-              type: 'element',
-              props: {
-                kind: 'button',
-                text: 'Get Started',
-                href: '#',
-                style: {
-                  background: '#3B82F6',
-                  color: '#ffffff',
-                  paddingY: 14,
-                  paddingX: 28,
-                  borderRadius: 8,
-                  fontSize: 16,
-                  fontWeight: 600,
-                },
+          children: [{
+            type: 'element',
+            props: {
+              kind: 'hero',
+              layout: 'centered',
+              headline: 'Build Amazing Funnels That Convert',
+              subheadline: 'The Complete Solution',
+              description: 'Create high-converting sales funnels, landing pages, and checkout experiences in minutes. No coding required.',
+              buttons: [
+                { text: 'Get Started', link: '#', style: 'primary' },
+                { text: 'Watch Demo', link: '#', style: 'secondary' },
+              ],
+              appearance: {
+                variables: {
+                  colorPrimary: '#3b82f6',
+                  colorBackground: '#ffffff',
+                  colorText: '#1f2937',
+                }
               }
             }
-          ]
+          }]
         }]
       }]
     },
@@ -88,19 +69,42 @@ export const HERO_TEMPLATES: Template[] = [
     description: 'Two-column layout with content on left, image on right',
     tags: ['hero', 'split', 'two-column'],
     structure: {
-      type: 'element',
+      type: 'section',
       props: {
-        kind: 'hero',
-        layout: 'split',
-        headline: 'Transform Your Business Today',
-        description: 'The all-in-one platform for building high-converting funnels.',
-        buttons: [
-          { text: 'Start Free Trial', link: '#', style: 'primary' },
-        ],
-        image: {
-          position: 'right',
-        },
+        background: '#f9fafb',
+        padding: { top: 60, bottom: 60, left: 20, right: 20 },
+        maxWidth: 1200,
       },
+      children: [{
+        type: 'row',
+        props: { gap: 16, verticalAlign: 'center' },
+        children: [{
+          type: 'column',
+          props: { width: 'auto' },
+          children: [{
+            type: 'element',
+            props: {
+              kind: 'hero',
+              layout: 'split',
+              headline: 'Transform Your Business Today',
+              description: 'The all-in-one platform for building high-converting funnels.',
+              buttons: [
+                { text: 'Start Free Trial', link: '#', style: 'primary' },
+              ],
+              image: {
+                position: 'right',
+              },
+              appearance: {
+                variables: {
+                  colorPrimary: '#3b82f6',
+                  colorBackground: '#f9fafb',
+                  colorText: '#1f2937',
+                }
+              }
+            }
+          }]
+        }]
+      }]
     },
   },
   {
@@ -111,16 +115,39 @@ export const HERO_TEMPLATES: Template[] = [
     description: 'Full-screen hero with background video or image',
     tags: ['hero', 'fullwidth', 'video', 'dramatic'],
     structure: {
-      type: 'element',
+      type: 'section',
       props: {
-        kind: 'hero',
-        layout: 'full-width',
-        headline: 'Welcome to the Future',
-        description: 'Experience the next generation of funnel building.',
-        buttons: [
-          { text: 'Get Started', link: '#', style: 'primary' },
-        ],
+        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+        padding: { top: 120, bottom: 120, left: 20, right: 20 },
+        maxWidth: 1400,
       },
+      children: [{
+        type: 'row',
+        props: { gap: 16, verticalAlign: 'center' },
+        children: [{
+          type: 'column',
+          props: { width: 'auto' },
+          children: [{
+            type: 'element',
+            props: {
+              kind: 'hero',
+              layout: 'full-width',
+              headline: 'Welcome to the Future',
+              description: 'Experience the next generation of funnel building.',
+              buttons: [
+                { text: 'Get Started', link: '#', style: 'primary' },
+              ],
+              appearance: {
+                variables: {
+                  colorPrimary: '#ffffff',
+                  colorBackground: 'transparent',
+                  colorText: '#ffffff',
+                }
+              }
+            }
+          }]
+        }]
+      }]
     },
   },
 ];

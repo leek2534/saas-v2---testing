@@ -91,7 +91,6 @@ export const HERO_TEMPLATES: Template[] = [
                 textAlign: 'center',
                 color: '#6B7280',
                 lineHeight: 1.6,
-                maxWidth: 700,
                 gapToNext: 32,
               }
             },

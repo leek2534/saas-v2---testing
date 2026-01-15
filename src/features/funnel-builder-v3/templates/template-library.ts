@@ -32,31 +32,123 @@ export const HERO_TEMPLATES: Template[] = [
       },
       children: [{
         type: 'row',
-        props: { gap: 16, verticalAlign: 'top' },
+        props: { gap: 24, verticalAlign: 'top' },
         children: [{
           type: 'column',
-          props: { width: 'auto' },
-          children: [{
-            type: 'element',
-            props: {
-              kind: 'hero',
-              layout: 'centered',
-              headline: 'Build Amazing Funnels That Convert',
-              subheadline: 'The Complete Solution',
-              description: 'Create high-converting sales funnels, landing pages, and checkout experiences in minutes. No coding required.',
-              buttons: [
-                { text: 'Get Started', link: '#', style: 'primary' },
-                { text: 'Watch Demo', link: '#', style: 'secondary' },
-              ],
-              appearance: {
-                variables: {
-                  colorPrimary: '#3b82f6',
-                  colorBackground: '#ffffff',
-                  colorText: '#1f2937',
-                }
+          props: { width: 'auto', padding: { top: 0, bottom: 0, left: 0, right: 0 } },
+          children: [
+            {
+              type: 'element',
+              props: {
+                kind: 'subheading',
+                content: { 
+                  type: 'doc', 
+                  content: [{ 
+                    type: 'paragraph', 
+                    content: [{ type: 'text', text: 'THE COMPLETE SOLUTION' }] 
+                  }] 
+                },
+                fontSize: 12,
+                textAlign: 'center',
+                fontWeight: 700,
+                color: '#3B82F6',
+                letterSpacing: 1.5,
+                textTransform: 'uppercase',
+                gapToNext: 16,
+              }
+            },
+            {
+              type: 'element',
+              props: {
+                kind: 'heading',
+                content: { 
+                  type: 'doc', 
+                  content: [{ 
+                    type: 'paragraph', 
+                    content: [{ type: 'text', text: 'Build Amazing Funnels That Convert' }] 
+                  }] 
+                },
+                fontSize: 56,
+                textAlign: 'center',
+                fontWeight: 800,
+                color: '#111827',
+                lineHeight: 1.1,
+                gapToNext: 24,
+              }
+            },
+            {
+              type: 'element',
+              props: {
+                kind: 'paragraph',
+                content: { 
+                  type: 'doc', 
+                  content: [{ 
+                    type: 'paragraph', 
+                    content: [{ type: 'text', text: 'Create high-converting sales funnels, landing pages, and checkout experiences in minutes. No coding required.' }] 
+                  }] 
+                },
+                fontSize: 20,
+                textAlign: 'center',
+                color: '#6B7280',
+                lineHeight: 1.6,
+                maxWidth: 700,
+                gapToNext: 32,
+              }
+            },
+            {
+              type: 'element',
+              props: {
+                kind: 'button',
+                text: 'Get Started Free',
+                href: '#',
+                align: 'center',
+                style: {
+                  background: '#3B82F6',
+                  color: '#ffffff',
+                  paddingY: 16,
+                  paddingX: 32,
+                  borderRadius: 10,
+                  fontSize: 18,
+                  fontWeight: 600,
+                  boxShadow: '0 10px 25px -5px rgba(59, 130, 246, 0.3)',
+                },
+                gapToNext: 16,
+              }
+            },
+            {
+              type: 'element',
+              props: {
+                kind: 'button',
+                text: 'Watch Demo',
+                href: '#',
+                align: 'center',
+                style: {
+                  background: 'transparent',
+                  color: '#3B82F6',
+                  paddingY: 16,
+                  paddingX: 32,
+                  borderRadius: 10,
+                  fontSize: 18,
+                  fontWeight: 600,
+                  border: '2px solid #3B82F6',
+                },
+                gapToNext: 48,
+              }
+            },
+            {
+              type: 'element',
+              props: {
+                kind: 'image',
+                src: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=600&fit=crop',
+                alt: 'Dashboard Preview',
+                maxWidth: 900,
+                borderRadius: 16,
+                objectFit: 'cover',
+                aspectRatio: '16/9',
+                boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
               }
             }
-          }]
+          ]
         }]
       }]
     },
@@ -72,38 +164,115 @@ export const HERO_TEMPLATES: Template[] = [
       type: 'section',
       props: {
         background: '#f9fafb',
-        padding: { top: 60, bottom: 60, left: 20, right: 20 },
+        padding: { top: 80, bottom: 80, left: 20, right: 20 },
         maxWidth: 1200,
       },
       children: [{
         type: 'row',
-        props: { gap: 16, verticalAlign: 'center' },
-        children: [{
-          type: 'column',
-          props: { width: 'auto' },
-          children: [{
-            type: 'element',
-            props: {
-              kind: 'hero',
-              layout: 'split',
-              headline: 'Transform Your Business Today',
-              description: 'The all-in-one platform for building high-converting funnels.',
-              buttons: [
-                { text: 'Start Free Trial', link: '#', style: 'primary' },
-              ],
-              image: {
-                position: 'right',
+        props: { gap: 48, verticalAlign: 'center' },
+        children: [
+          {
+            type: 'column',
+            props: { width: '50%', padding: { top: 0, bottom: 0, left: 0, right: 24 } },
+            children: [
+              {
+                type: 'element',
+                props: {
+                  kind: 'subheading',
+                  content: { 
+                    type: 'doc', 
+                    content: [{ 
+                      type: 'paragraph', 
+                      content: [{ type: 'text', text: 'POWERFUL & SIMPLE' }] 
+                    }] 
+                  },
+                  fontSize: 12,
+                  textAlign: 'left',
+                  fontWeight: 700,
+                  color: '#3B82F6',
+                  letterSpacing: 1.5,
+                  textTransform: 'uppercase',
+                  gapToNext: 16,
+                }
               },
-              appearance: {
-                variables: {
-                  colorPrimary: '#3b82f6',
-                  colorBackground: '#f9fafb',
-                  colorText: '#1f2937',
+              {
+                type: 'element',
+                props: {
+                  kind: 'heading',
+                  content: { 
+                    type: 'doc', 
+                    content: [{ 
+                      type: 'paragraph', 
+                      content: [{ type: 'text', text: 'Transform Your Business Today' }] 
+                    }] 
+                  },
+                  fontSize: 48,
+                  textAlign: 'left',
+                  fontWeight: 800,
+                  color: '#111827',
+                  lineHeight: 1.1,
+                  gapToNext: 20,
+                }
+              },
+              {
+                type: 'element',
+                props: {
+                  kind: 'paragraph',
+                  content: { 
+                    type: 'doc', 
+                    content: [{ 
+                      type: 'paragraph', 
+                      content: [{ type: 'text', text: 'The all-in-one platform for building high-converting funnels. Launch faster, convert better, and grow your business with ease.' }] 
+                    }] 
+                  },
+                  fontSize: 18,
+                  textAlign: 'left',
+                  color: '#6B7280',
+                  lineHeight: 1.6,
+                  gapToNext: 32,
+                }
+              },
+              {
+                type: 'element',
+                props: {
+                  kind: 'button',
+                  text: 'Start Free Trial',
+                  href: '#',
+                  align: 'left',
+                  style: {
+                    background: '#3B82F6',
+                    color: '#ffffff',
+                    paddingY: 16,
+                    paddingX: 32,
+                    borderRadius: 10,
+                    fontSize: 18,
+                    fontWeight: 600,
+                    boxShadow: '0 10px 25px -5px rgba(59, 130, 246, 0.3)',
+                  },
                 }
               }
-            }
-          }]
-        }]
+            ]
+          },
+          {
+            type: 'column',
+            props: { width: '50%', padding: { top: 0, bottom: 0, left: 24, right: 0 } },
+            children: [
+              {
+                type: 'element',
+                props: {
+                  kind: 'image',
+                  src: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop',
+                  alt: 'Product Dashboard',
+                  maxWidth: 600,
+                  borderRadius: 16,
+                  objectFit: 'cover',
+                  aspectRatio: '4/3',
+                  boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+                }
+              }
+            ]
+          }
+        ]
       }]
     },
   },
@@ -123,29 +292,69 @@ export const HERO_TEMPLATES: Template[] = [
       },
       children: [{
         type: 'row',
-        props: { gap: 16, verticalAlign: 'center' },
+        props: { gap: 24, verticalAlign: 'center' },
         children: [{
           type: 'column',
-          props: { width: 'auto' },
-          children: [{
-            type: 'element',
-            props: {
-              kind: 'hero',
-              layout: 'full-width',
-              headline: 'Welcome to the Future',
-              description: 'Experience the next generation of funnel building.',
-              buttons: [
-                { text: 'Get Started', link: '#', style: 'primary' },
-              ],
-              appearance: {
-                variables: {
-                  colorPrimary: '#ffffff',
-                  colorBackground: 'transparent',
-                  colorText: '#ffffff',
-                }
+          props: { width: 'auto', padding: { top: 0, bottom: 0, left: 0, right: 0 } },
+          children: [
+            {
+              type: 'element',
+              props: {
+                kind: 'heading',
+                content: { 
+                  type: 'doc', 
+                  content: [{ 
+                    type: 'paragraph', 
+                    content: [{ type: 'text', text: 'Welcome to the Future' }] 
+                  }] 
+                },
+                fontSize: 64,
+                textAlign: 'center',
+                fontWeight: 900,
+                color: '#ffffff',
+                lineHeight: 1.1,
+                gapToNext: 24,
+              }
+            },
+            {
+              type: 'element',
+              props: {
+                kind: 'paragraph',
+                content: { 
+                  type: 'doc', 
+                  content: [{ 
+                    type: 'paragraph', 
+                    content: [{ type: 'text', text: 'Experience the next generation of funnel building. Create stunning pages that convert visitors into customers.' }] 
+                  }] 
+                },
+                fontSize: 22,
+                textAlign: 'center',
+                color: 'rgba(255, 255, 255, 0.9)',
+                lineHeight: 1.6,
+                maxWidth: 800,
+                gapToNext: 40,
+              }
+            },
+            {
+              type: 'element',
+              props: {
+                kind: 'button',
+                text: 'Get Started',
+                href: '#',
+                align: 'center',
+                style: {
+                  background: '#ffffff',
+                  color: '#667eea',
+                  paddingY: 18,
+                  paddingX: 36,
+                  borderRadius: 12,
+                  fontSize: 20,
+                  fontWeight: 700,
+                  boxShadow: '0 20px 40px -10px rgba(0, 0, 0, 0.3)',
+                },
               }
             }
-          }]
+          ]
         }]
       }]
     },

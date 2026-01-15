@@ -1,0 +1,269 @@
+/**
+ * Canvas Animations & UX Polish
+ * Professional Canva-style animations and visual feedback
+ */
+
+/* Animated Selection Border - Subtle Pulsation */
+.kanva-selection-animated {
+  animation: selection-pulse 2s ease-in-out infinite;
+  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.3);
+}
+
+@keyframes selection-pulse {
+  0%, 100% {
+    border-color: #4F46E5;
+    box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.3);
+  }
+  50% {
+    border-color: #6366F1;
+    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.2);
+  }
+}
+
+/* Handle Hover Effects */
+.kanva-handle {
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.kanva-handle:hover {
+  transform: scale(1.25);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.kanva-handle:active {
+  transform: scale(1.1);
+}
+
+/* Rotation Handle Pulse */
+.kanva-rotation-handle {
+  animation: rotation-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes rotation-pulse {
+  0%, 100% {
+    transform: translateX(-50%) scale(1);
+  }
+  50% {
+    transform: translateX(-50%) scale(1.1);
+  }
+}
+
+/* Drag Cursor */
+.kanva-dragging {
+  cursor: grabbing !important;
+}
+
+.kanva-draggable {
+  cursor: grab;
+}
+
+/* Resize Cursors */
+.kanva-resize-nw { cursor: nw-resize; }
+.kanva-resize-n { cursor: n-resize; }
+.kanva-resize-ne { cursor: ne-resize; }
+.kanva-resize-e { cursor: e-resize; }
+.kanva-resize-se { cursor: se-resize; }
+.kanva-resize-s { cursor: s-resize; }
+.kanva-resize-sw { cursor: sw-resize; }
+.kanva-resize-w { cursor: w-resize; }
+
+/* Snap Engagement Animation */
+.kanva-snap-engaged {
+  transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Guide Line Animations */
+.kanva-guide-line {
+  animation: guide-fade-in 0.2s ease-out;
+}
+
+@keyframes guide-fade-in {
+  from {
+    opacity: 0;
+    transform: scaleY(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+
+/* Alignment Badge Animation */
+.kanva-alignment-badge {
+  animation: badge-pop 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes badge-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Marquee Selection Animation */
+.kanva-marquee {
+  animation: marquee-dash 0.5s linear infinite;
+  border-style: dashed;
+}
+
+@keyframes marquee-dash {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+
+/* Element Hover State */
+.kanva-element:hover {
+  outline: 2px solid rgba(79, 70, 229, 0.3);
+  outline-offset: 2px;
+}
+
+/* Locked Element Indicator */
+.kanva-locked {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.kanva-locked::after {
+  content: '🔒';
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  font-size: 12px;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 2px 6px;
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+/* Smooth Transform Transitions */
+.kanva-smooth-transform {
+  transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Keyboard Modifier Hint */
+.kanva-modifier-hint {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  pointer-events: none;
+  z-index: 10000;
+  animation: hint-fade-in 0.2s ease-out;
+}
+
+@keyframes hint-fade-in {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* Canvas Glow on Selection */
+.kanva-canvas-selected {
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.15),
+    0 0 0 1px rgba(0, 0, 0, 0.05),
+    0 0 0 4px rgba(79, 70, 229, 0.2);
+  transition: box-shadow 0.2s ease-out;
+}
+
+/* Drag Friction Easing */
+@keyframes drag-friction {
+  0% {
+    transform: translate(var(--drag-x), var(--drag-y));
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+/* Loading State */
+.kanva-loading {
+  position: relative;
+  pointer-events: none;
+}
+
+.kanva-loading::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Success Flash */
+@keyframes success-flash {
+  0%, 100% {
+    background-color: transparent;
+  }
+  50% {
+    background-color: rgba(34, 197, 94, 0.2);
+  }
+}
+
+.kanva-success-flash {
+  animation: success-flash 0.5s ease-out;
+}
+
+/* Error Shake */
+@keyframes error-shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-10px);
+  }
+  75% {
+    transform: translateX(10px);
+  }
+}
+
+.kanva-error-shake {
+  animation: error-shake 0.4s ease-out;
+}
+
+/* Zoom Indicator */
+.kanva-zoom-indicator {
+  transition: opacity 0.2s ease-out;
+}
+
+.kanva-zoom-indicator.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Performance Optimizations */
+.kanva-gpu-accelerated {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Smooth Scroll */
+.kanva-smooth-scroll {
+  scroll-behavior: smooth;
+}
+
+/* Focus Ring */
+.kanva-focus-ring:focus-visible {
+  outline: 2px solid #4F46E5;
+  outline-offset: 2px;
+  border-radius: 4px;
+}

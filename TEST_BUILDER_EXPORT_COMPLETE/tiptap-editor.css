@@ -1,0 +1,46 @@
+/* TipTap / ProseMirror base styles for the test builder */
+
+/* Remove default margins so empty trailing blocks don't show as extra space */
+.ProseMirror p,
+.ProseMirror h1,
+.ProseMirror h2,
+.ProseMirror h3,
+.ProseMirror h4,
+.ProseMirror h5,
+.ProseMirror h6 {
+  margin: 0;
+  word-break: break-word !important;
+  overflow-wrap: break-word !important;
+  hyphens: auto !important;
+  white-space: normal !important;
+}
+
+/* Apply word-break to the editor container itself */
+.ProseMirror {
+  word-break: break-word !important;
+  overflow-wrap: break-word !important;
+  hyphens: auto !important;
+  white-space: normal !important;
+}
+
+/* Ensure all text content wraps properly */
+.ProseMirror * {
+  word-break: break-word !important;
+  overflow-wrap: break-word !important;
+}
+
+/* Hide the special trailing break node TipTap inserts for cursor handling */
+.ProseMirror br.ProseMirror-trailingBreak {
+  display: none;
+}
+
+/* Disable ALL hover effects during column resize */
+body.resizing-columns * {
+  pointer-events: none !important;
+}
+
+/* Keep the resize overlay interactive */
+body.resizing-columns #resize-overlay {
+  pointer-events: auto !important;
+}
+

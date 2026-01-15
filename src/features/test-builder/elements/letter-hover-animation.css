@@ -1,0 +1,49 @@
+/* Letter Hover Animation Styles */
+
+.letter-hover-container {
+  display: inline-block;
+  line-height: inherit;
+  word-spacing: normal;
+  letter-spacing: inherit;
+}
+
+.letter-hover-letter {
+  display: inline-block;
+  transition: transform var(--duration, 0.3s) cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform-origin: center bottom;
+  cursor: default;
+  user-select: none;
+  position: relative;
+  transform: scale(1);
+}
+
+/* Hover effect on individual letters */
+.letter-hover-letter:hover {
+  transform: scale(var(--scale-amount, 1.2)) !important;
+  z-index: 1;
+}
+
+/* Preserve spacing for spaces */
+.letter-space {
+  display: inline-block;
+  white-space: pre;
+  user-select: none;
+}
+
+/* Ensure proper display for all text elements */
+.letter-hover-container .ProseMirror {
+  display: inline-block;
+}
+
+.letter-hover-container .ProseMirror p,
+.letter-hover-container .ProseMirror h1,
+.letter-hover-container .ProseMirror h2,
+.letter-hover-container .ProseMirror h3,
+.letter-hover-container .ProseMirror h4,
+.letter-hover-container .ProseMirror h5,
+.letter-hover-container .ProseMirror h6 {
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+

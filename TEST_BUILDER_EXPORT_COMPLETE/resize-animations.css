@@ -1,0 +1,59 @@
+/* Resize Mode Animations - Clean and smooth */
+
+/* Pulse glow animation for resize mode highlight */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.4), 0 0 20px rgba(249, 115, 22, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(249, 115, 22, 0.5), 0 0 30px rgba(249, 115, 22, 0.3);
+  }
+}
+
+/* Fade in and scale animation for corner handles */
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+/* Fade in width animation for horizontal edge handles */
+@keyframes fadeInWidth {
+  0% {
+    opacity: 0;
+    width: 0%;
+  }
+  100% {
+    opacity: 1;
+    width: 100%;
+  }
+}
+
+/* Fade in height animation for vertical edge handles */
+@keyframes fadeInHeight {
+  0% {
+    opacity: 0;
+    height: 0%;
+  }
+  100% {
+    opacity: 1;
+    height: 100%;
+  }
+}
+
+/* Smooth transitions for handle interactions */
+.resize-handle-corner {
+  transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+}
+
+.resize-handle-edge {
+  transition: width 0.2s ease-out, height 0.2s ease-out, opacity 0.2s ease-out;
+}
+
+
+

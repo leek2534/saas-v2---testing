@@ -90,10 +90,9 @@ export function Element({ node }: { node: ElementNode }) {
 
   const selectedId = useFunnelEditorStore((s) => s.selectedId);
 
-  const onWrapperMouseDown = (e: React.MouseEvent) => {
+  const onClick = (e: React.MouseEvent) => {
     if (isPreview) return;
     e.stopPropagation();
-    e.preventDefault(); // Prevent any default behavior that might interfere
     
     // Clear any existing editing state when clicking a different element
     const st = useFunnelEditorStore.getState();
@@ -101,7 +100,7 @@ export function Element({ node }: { node: ElementNode }) {
       setEditingElement(null);
     }
     
-    // Always select this element on click (removes conditional check)
+    // Always select this element on click
     select(node.id);
     
     // For text elements, second click starts editing if already selected
@@ -219,7 +218,7 @@ export function Element({ node }: { node: ElementNode }) {
             onKeyDown={(e) => {
               if (e.key === "Escape") setEditingElement(null);
             }}
-            onMouseDown={!hasClickAction ? onWrapperMouseDown : undefined}
+            onClick={!hasClickAction ? onClick : undefined}
             onDoubleClick={!hasClickAction ? onWrapperDoubleClick : undefined}
           >
             <div 
@@ -779,7 +778,7 @@ export function Element({ node }: { node: ElementNode }) {
       data-node-type={isPreview ? undefined : "element"}
       className="relative w-full"
       style={wrapperStyle}
-      onMouseDown={onWrapperMouseDown}
+      onClick={onClick}
       onDoubleClick={onWrapperDoubleClick}
     >
       {renderContent()}

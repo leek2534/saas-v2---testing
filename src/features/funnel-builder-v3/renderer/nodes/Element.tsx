@@ -93,6 +93,7 @@ export function Element({ node }: { node: ElementNode }) {
   const onWrapperMouseDown = (e: React.MouseEvent) => {
     if (isPreview) return;
     e.stopPropagation();
+    e.preventDefault(); // Prevent any default behavior that might interfere
     
     // Clear any existing editing state when clicking a different element
     const st = useFunnelEditorStore.getState();
@@ -100,12 +101,10 @@ export function Element({ node }: { node: ElementNode }) {
       setEditingElement(null);
     }
     
-    // Select this element
-    if (selectedId !== node.id) {
-      select(node.id);
-    }
+    // Always select this element on click (removes conditional check)
+    select(node.id);
     
-    // For text elements, click starts editing if already selected
+    // For text elements, second click starts editing if already selected
     if ((kind === "heading" || kind === "subheading" || kind === "text" || kind === "paragraph") && selectedId === node.id) {
       setEditingElement(node.id);
     }

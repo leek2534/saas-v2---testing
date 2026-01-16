@@ -1413,7 +1413,7 @@ export const useFunnelEditorStore = create<FunnelEditorState>((set, get) => {
     updateNode,
 
     updateNodeProps: (nodeId, propsPatch) => {
-      const { tree } = get();
+      const { tree, selectedId } = get();
       const existing = tree.nodes[nodeId];
       if (!existing) return;
       set({
@@ -1427,6 +1427,8 @@ export const useFunnelEditorStore = create<FunnelEditorState>((set, get) => {
             } as AnyNode,
           },
         },
+        // Explicitly preserve selection during property updates
+        selectedId: selectedId,
       });
     },
 

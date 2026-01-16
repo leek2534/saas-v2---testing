@@ -16,6 +16,7 @@ import { ActionsSection } from "./sections/ActionsSection";
 import { TrackingSection } from "./sections/TrackingSection";
 import { AdvancedSection } from "./sections/AdvancedSection";
 import { AccessibilitySection } from "./sections/AccessibilitySection";
+import { ChevronDown, ChevronRight } from "lucide-react";
 
 interface VideoSettingsPanelProps {
   node: ElementNode;
@@ -80,7 +81,7 @@ export function VideoSettingsPanel({ node }: VideoSettingsPanelProps) {
   const validation = validateVideoSettings(settings, settings.source.provider);
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-3">
       {/* Device Toggle */}
       <DeviceToggle
         currentDevice={currentDevice}
@@ -114,21 +115,21 @@ export function VideoSettingsPanel({ node }: VideoSettingsPanelProps) {
       )}
 
       {/* Accordion Sections */}
-      <div className="space-y-2">
+      <div className="space-y-3">
         {/* Source Section */}
-        <div className="border border-slate-200 rounded-lg overflow-hidden">
+        <div className="space-y-2">
           <button
             onClick={() => toggleSection('source')}
-            className="w-full px-4 py-3 flex items-center justify-between bg-white hover:bg-slate-50 transition-colors"
+            className="w-full flex items-center justify-between py-2 px-3 bg-slate-50 hover:bg-slate-100 rounded-lg transition-colors"
           >
-            <span className="text-sm font-medium text-slate-900">Source</span>
+            <span className="text-xs font-bold text-slate-700 uppercase tracking-wide">Source</span>
             <div className="flex items-center gap-2">
               <SectionHeaderSummary summary={settings.source.provider.toUpperCase()} />
-              <span className="text-slate-400">{openSections.includes('source') ? '−' : '+'}</span>
+              {openSections.includes('source') ? <ChevronDown className="h-4 w-4 text-slate-500" /> : <ChevronRight className="h-4 w-4 text-slate-500" />}
             </div>
           </button>
           {openSections.includes('source') && (
-            <div className="px-4 py-3 border-t border-slate-200 bg-slate-50">
+            <div className="px-1">
               <SourceSection
                 source={settings.source}
                 onChange={(updates) => updateSettings({ source: { ...settings.source, ...updates } })}
@@ -138,19 +139,19 @@ export function VideoSettingsPanel({ node }: VideoSettingsPanelProps) {
         </div>
 
         {/* Playback Section */}
-        <div className="border border-slate-200 rounded-lg overflow-hidden">
+        <div className="space-y-2">
           <button
             onClick={() => toggleSection('playback')}
-            className="w-full px-4 py-3 flex items-center justify-between bg-white hover:bg-slate-50 transition-colors"
+            className="w-full flex items-center justify-between py-2 px-3 bg-slate-50 hover:bg-slate-100 rounded-lg transition-colors"
           >
-            <span className="text-sm font-medium text-slate-900">Playback</span>
+            <span className="text-xs font-bold text-slate-700 uppercase tracking-wide">Playback</span>
             <div className="flex items-center gap-2">
               <SectionHeaderSummary summary={computePlaybackSummary(settings)} />
-              <span className="text-slate-400">{openSections.includes('playback') ? '−' : '+'}</span>
+              {openSections.includes('playback') ? <ChevronDown className="h-4 w-4 text-slate-500" /> : <ChevronRight className="h-4 w-4 text-slate-500" />}
             </div>
           </button>
           {openSections.includes('playback') && (
-            <div className="px-4 py-3 border-t border-slate-200 bg-slate-50">
+            <div className="px-1">
               <PlaybackSection
                 playback={settings.playback}
                 provider={settings.source.provider}
@@ -161,19 +162,19 @@ export function VideoSettingsPanel({ node }: VideoSettingsPanelProps) {
         </div>
 
         {/* Controls & UX Section */}
-        <div className="border border-slate-200 rounded-lg overflow-hidden">
+        <div className="space-y-2">
           <button
             onClick={() => toggleSection('controls')}
-            className="w-full px-4 py-3 flex items-center justify-between bg-white hover:bg-slate-50 transition-colors"
+            className="w-full flex items-center justify-between py-2 px-3 bg-slate-50 hover:bg-slate-100 rounded-lg transition-colors"
           >
-            <span className="text-sm font-medium text-slate-900">Controls & UX</span>
+            <span className="text-xs font-bold text-slate-700 uppercase tracking-wide">Controls & UX</span>
             <div className="flex items-center gap-2">
               <SectionHeaderSummary summary={settings.controls.showControls ? 'Controls on' : 'Controls off'} />
-              <span className="text-slate-400">{openSections.includes('controls') ? '−' : '+'}</span>
+              {openSections.includes('controls') ? <ChevronDown className="h-4 w-4 text-slate-500" /> : <ChevronRight className="h-4 w-4 text-slate-500" />}
             </div>
           </button>
           {openSections.includes('controls') && (
-            <div className="px-4 py-3 border-t border-slate-200 bg-slate-50">
+            <div className="px-1">
               <ControlsSection
                 controls={settings.controls}
                 provider={settings.source.provider}
@@ -184,19 +185,19 @@ export function VideoSettingsPanel({ node }: VideoSettingsPanelProps) {
         </div>
 
         {/* Layout & Style Section */}
-        <div className="border border-slate-200 rounded-lg overflow-hidden">
+        <div className="space-y-2">
           <button
             onClick={() => toggleSection('layout')}
-            className="w-full px-4 py-3 flex items-center justify-between bg-white hover:bg-slate-50 transition-colors"
+            className="w-full flex items-center justify-between py-2 px-3 bg-slate-50 hover:bg-slate-100 rounded-lg transition-colors"
           >
-            <span className="text-sm font-medium text-slate-900">Layout & Style</span>
+            <span className="text-xs font-bold text-slate-700 uppercase tracking-wide">Layout & Style</span>
             <div className="flex items-center gap-2">
               <SectionHeaderSummary summary={computeLayoutSummary(settings)} />
-              <span className="text-slate-400">{openSections.includes('layout') ? '−' : '+'}</span>
+              {openSections.includes('layout') ? <ChevronDown className="h-4 w-4 text-slate-500" /> : <ChevronRight className="h-4 w-4 text-slate-500" />}
             </div>
           </button>
           {openSections.includes('layout') && (
-            <div className="px-4 py-3 border-t border-slate-200 bg-slate-50">
+            <div className="px-1">
               <LayoutStyleSection
                 layout={settings.layout}
                 onChange={(updates) => updateSettings({ layout: { ...settings.layout, ...updates } })}
@@ -206,19 +207,19 @@ export function VideoSettingsPanel({ node }: VideoSettingsPanelProps) {
         </div>
 
         {/* Actions Section */}
-        <div className="border border-slate-200 rounded-lg overflow-hidden">
+        <div className="space-y-2">
           <button
             onClick={() => toggleSection('actions')}
-            className="w-full px-4 py-3 flex items-center justify-between bg-white hover:bg-slate-50 transition-colors"
+            className="w-full flex items-center justify-between py-2 px-3 bg-slate-50 hover:bg-slate-100 rounded-lg transition-colors"
           >
-            <span className="text-sm font-medium text-slate-900">Actions</span>
+            <span className="text-xs font-bold text-slate-700 uppercase tracking-wide">Actions</span>
             <div className="flex items-center gap-2">
               <SectionHeaderSummary summary={computeActionsSummary(settings)} />
-              <span className="text-slate-400">{openSections.includes('actions') ? '−' : '+'}</span>
+              {openSections.includes('actions') ? <ChevronDown className="h-4 w-4 text-slate-500" /> : <ChevronRight className="h-4 w-4 text-slate-500" />}
             </div>
           </button>
           {openSections.includes('actions') && (
-            <div className="px-4 py-3 border-t border-slate-200 bg-slate-50">
+            <div className="px-1">
               <ActionsSection
                 actions={settings.actions}
                 isLoopEnabled={settings.playback.loop}
@@ -229,19 +230,19 @@ export function VideoSettingsPanel({ node }: VideoSettingsPanelProps) {
         </div>
 
         {/* Tracking Section */}
-        <div className="border border-slate-200 rounded-lg overflow-hidden">
+        <div className="space-y-2">
           <button
             onClick={() => toggleSection('tracking')}
-            className="w-full px-4 py-3 flex items-center justify-between bg-white hover:bg-slate-50 transition-colors"
+            className="w-full flex items-center justify-between py-2 px-3 bg-slate-50 hover:bg-slate-100 rounded-lg transition-colors"
           >
-            <span className="text-sm font-medium text-slate-900">Tracking</span>
+            <span className="text-xs font-bold text-slate-700 uppercase tracking-wide">Tracking</span>
             <div className="flex items-center gap-2">
               <SectionHeaderSummary summary={computeTrackingSummary(settings)} />
-              <span className="text-slate-400">{openSections.includes('tracking') ? '−' : '+'}</span>
+              {openSections.includes('tracking') ? <ChevronDown className="h-4 w-4 text-slate-500" /> : <ChevronRight className="h-4 w-4 text-slate-500" />}
             </div>
           </button>
           {openSections.includes('tracking') && (
-            <div className="px-4 py-3 border-t border-slate-200 bg-slate-50">
+            <div className="px-1">
               <TrackingSection
                 tracking={settings.tracking}
                 onChange={(updates) => updateSettings({ tracking: { ...settings.tracking, ...updates } })}
@@ -251,18 +252,16 @@ export function VideoSettingsPanel({ node }: VideoSettingsPanelProps) {
         </div>
 
         {/* Advanced Section */}
-        <div className="border border-slate-200 rounded-lg overflow-hidden">
+        <div className="space-y-2">
           <button
             onClick={() => toggleSection('advanced')}
-            className="w-full px-4 py-3 flex items-center justify-between bg-white hover:bg-slate-50 transition-colors"
+            className="w-full flex items-center justify-between py-2 px-3 bg-slate-50 hover:bg-slate-100 rounded-lg transition-colors"
           >
-            <span className="text-sm font-medium text-slate-900">Advanced</span>
-            <div className="flex items-center gap-2">
-              <span className="text-slate-400">{openSections.includes('advanced') ? '−' : '+'}</span>
-            </div>
+            <span className="text-xs font-bold text-slate-700 uppercase tracking-wide">Advanced</span>
+            {openSections.includes('advanced') ? <ChevronDown className="h-4 w-4 text-slate-500" /> : <ChevronRight className="h-4 w-4 text-slate-500" />}
           </button>
           {openSections.includes('advanced') && (
-            <div className="px-4 py-3 border-t border-slate-200 bg-slate-50">
+            <div className="px-1">
               <AdvancedSection
                 advanced={settings.advanced}
                 onChange={(updates) => updateSettings({ advanced: { ...settings.advanced, ...updates } })}
@@ -272,18 +271,16 @@ export function VideoSettingsPanel({ node }: VideoSettingsPanelProps) {
         </div>
 
         {/* Accessibility Section */}
-        <div className="border border-slate-200 rounded-lg overflow-hidden">
+        <div className="space-y-2">
           <button
             onClick={() => toggleSection('accessibility')}
-            className="w-full px-4 py-3 flex items-center justify-between bg-white hover:bg-slate-50 transition-colors"
+            className="w-full flex items-center justify-between py-2 px-3 bg-slate-50 hover:bg-slate-100 rounded-lg transition-colors"
           >
-            <span className="text-sm font-medium text-slate-900">Accessibility</span>
-            <div className="flex items-center gap-2">
-              <span className="text-slate-400">{openSections.includes('accessibility') ? '−' : '+'}</span>
-            </div>
+            <span className="text-xs font-bold text-slate-700 uppercase tracking-wide">Accessibility</span>
+            {openSections.includes('accessibility') ? <ChevronDown className="h-4 w-4 text-slate-500" /> : <ChevronRight className="h-4 w-4 text-slate-500" />}
           </button>
           {openSections.includes('accessibility') && (
-            <div className="px-4 py-3 border-t border-slate-200 bg-slate-50">
+            <div className="px-1">
               <AccessibilitySection
                 accessibility={settings.accessibility}
                 provider={settings.source.provider}

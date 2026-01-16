@@ -17,16 +17,27 @@ export function TextPanel({ node }: { node: ElementNode }) {
   const updateNodeProps = useFunnelEditorStore((s) => s.updateNodeProps);
   const kind = node.props.kind;
   
-  const [expandedSections, setExpandedSections] = useState({
+  const [openSections, setOpenSections] = useState({
+    content: true,
     typography: true,
     color: false,
     spacing: false,
     advanced: false,
   });
 
-  const toggleSection = (section: keyof typeof expandedSections) => {
-    setExpandedSections(prev => ({ ...prev, [section]: !prev[section] }));
+  const toggleSection = (section: keyof typeof openSections) => {
+    setOpenSections(prev => ({ ...prev, [section]: !prev[section] }));
   };
+
+  const SectionHeader = ({ title, section }: { title: string; section: keyof typeof openSections }) => (
+    <button
+      onClick={() => toggleSection(section)}
+      className="w-full flex items-center justify-between py-2 px-3 bg-slate-50 hover:bg-slate-100 rounded-lg transition-colors"
+    >
+      <span className="text-xs font-bold text-slate-700 uppercase tracking-wide">{title}</span>
+      {openSections[section] ? <ChevronDown className="h-4 w-4 text-slate-500" /> : <ChevronRight className="h-4 w-4 text-slate-500" />}
+    </button>
+  );
   
   const richValue = safeDoc(
     node.props.content as any, 
@@ -36,32 +47,30 @@ export function TextPanel({ node }: { node: ElementNode }) {
   );
 
   return (
-    <div className="space-y-4">
-      {/* Rich Text Editor */}
+    <div className="space-y-3">
+      {/* CONTENT SECTION */}
       <div className="space-y-2">
-        <div className="text-xs font-semibold text-slate-700 uppercase tracking-wide">Content</div>
-        <div className="rounded-xl border border-slate-200 p-3 bg-slate-50">
-          <RichText
-            value={richValue}
-            editable
-            inline
-            onChange={(next) => updateNodeProps(node.id, { content: next })}
-            className="min-h-[120px]"
-          />
-        </div>
+        <SectionHeader title="Content" section="content" />
+        {openSections.content && (
+          <div className="px-1">
+            <div className="rounded-lg border border-slate-200 p-3 bg-slate-50">
+              <RichText
+                value={richValue}
+                editable
+                inline
+                onChange={(next) => updateNodeProps(node.id, { content: next })}
+                className="min-h-[100px]"
+              />
+            </div>
+          </div>
+        )}
       </div>
 
-      {/* Typography Section */}
-      <div className="space-y-3 rounded-xl border border-slate-200 overflow-hidden">
-        <button
-          onClick={() => toggleSection('typography')}
-          className="w-full flex items-center justify-between p-3 bg-slate-50 hover:bg-slate-100 transition-colors"
-        >
-          <div className="text-xs font-semibold text-slate-700 uppercase tracking-wide">Typography</div>
-          {expandedSections.typography ? <ChevronDown className="w-4 h-4 text-slate-400" /> : <ChevronRight className="w-4 h-4 text-slate-400" />}
-        </button>
-        {expandedSections.typography && (
-          <div className="p-3 space-y-3">
+      {/* TYPOGRAPHY SECTION */}
+      <div className="space-y-2">
+        <SectionHeader title="Typography" section="typography" />
+        {openSections.typography && (
+          <div className="space-y-3 px-1">
             <SelectField
               label="Font Size"
               value={String(node.props.fontSize ?? (kind === "heading" ? 36 : kind === "subheading" ? 20 : 16))}
@@ -140,17 +149,11 @@ export function TextPanel({ node }: { node: ElementNode }) {
         )}
       </div>
 
-      {/* Color & Effects Section */}
-      <div className="space-y-3 rounded-xl border border-slate-200 overflow-hidden">
-        <button
-          onClick={() => toggleSection('color')}
-          className="w-full flex items-center justify-between p-3 bg-slate-50 hover:bg-slate-100 transition-colors"
-        >
-          <div className="text-xs font-semibold text-slate-700 uppercase tracking-wide">Color & Effects</div>
-          {expandedSections.color ? <ChevronDown className="w-4 h-4 text-slate-400" /> : <ChevronRight className="w-4 h-4 text-slate-400" />}
-        </button>
-        {expandedSections.color && (
-          <div className="p-3 space-y-3">
+      {/* COLOR & EFFECTS SECTION */}
+      <div className="space-y-2">
+        <SectionHeader title="Color & Effects" section="color" />
+        {openSections.color && (
+          <div className="space-y-3 px-1">
             <ColorField
               label="Text Color"
               value={node.props.color ?? "#334155"}
@@ -164,23 +167,17 @@ export function TextPanel({ node }: { node: ElementNode }) {
                 value={node.props.textShadow ?? ""}
                 onChange={(v) => updateNodeProps(node.id, { textShadow: v })}
               />
-              <div className="text-xs text-slate-500 mt-1">Example: 2px 2px 4px rgba(0,0,0,0.3)</div>
+              <div className="text-xs text-slate-500 mt-1">e.g., 2px 2px 4px rgba(0,0,0,0.3)</div>
             </div>
           </div>
         )}
       </div>
 
-      {/* Spacing Section */}
-      <div className="space-y-3 rounded-xl border border-slate-200 overflow-hidden">
-        <button
-          onClick={() => toggleSection('spacing')}
-          className="w-full flex items-center justify-between p-3 bg-slate-50 hover:bg-slate-100 transition-colors"
-        >
-          <div className="text-xs font-semibold text-slate-700 uppercase tracking-wide">Spacing</div>
-          {expandedSections.spacing ? <ChevronDown className="w-4 h-4 text-slate-400" /> : <ChevronRight className="w-4 h-4 text-slate-400" />}
-        </button>
-        {expandedSections.spacing && (
-          <div className="p-3 space-y-4">
+      {/* SPACING SECTION */}
+      <div className="space-y-2">
+        <SectionHeader title="Spacing" section="spacing" />
+        {openSections.spacing && (
+          <div className="space-y-4 px-1">
             <SpacingField
               label="Padding"
               top={node.props.paddingTop ?? 12}
@@ -211,17 +208,11 @@ export function TextPanel({ node }: { node: ElementNode }) {
         )}
       </div>
 
-      {/* Advanced Section */}
-      <div className="space-y-3 rounded-xl border border-slate-200 overflow-hidden">
-        <button
-          onClick={() => toggleSection('advanced')}
-          className="w-full flex items-center justify-between p-3 bg-slate-50 hover:bg-slate-100 transition-colors"
-        >
-          <div className="text-xs font-semibold text-slate-700 uppercase tracking-wide">Advanced</div>
-          {expandedSections.advanced ? <ChevronDown className="w-4 h-4 text-slate-400" /> : <ChevronRight className="w-4 h-4 text-slate-400" />}
-        </button>
-        {expandedSections.advanced && (
-          <div className="p-3 space-y-3">
+      {/* ADVANCED SECTION */}
+      <div className="space-y-2">
+        <SectionHeader title="Advanced" section="advanced" />
+        {openSections.advanced && (
+          <div className="space-y-3 px-1">
             <ColorField
               label="Background Color"
               value={node.props.backgroundColor ?? "transparent"}

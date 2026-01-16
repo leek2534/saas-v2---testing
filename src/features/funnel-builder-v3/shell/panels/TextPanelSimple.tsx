@@ -176,6 +176,21 @@ export function TextPanelSimple({ node }: { node: ElementNode }) {
             />
 
             <div>
+              <div className="text-xs font-medium text-slate-600 mb-2">Opacity</div>
+              <div className="flex items-center gap-3">
+                <input
+                  type="range"
+                  min={0}
+                  max={100}
+                  value={(node.props.opacity ?? 1) * 100}
+                  onChange={(e) => updateNodeProps(node.id, { opacity: Number(e.target.value) / 100 })}
+                  className="flex-1 h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
+                />
+                <span className="text-xs text-slate-500 w-10 text-right">{Math.round((node.props.opacity ?? 1) * 100)}%</span>
+              </div>
+            </div>
+
+            <div>
               <div className="text-xs font-medium text-slate-600 mb-2">Text Shadow</div>
               <input
                 type="text"
@@ -195,6 +210,29 @@ export function TextPanelSimple({ node }: { node: ElementNode }) {
         <SectionHeader title="Spacing" section="spacing" />
         {openSections.spacing && (
           <div className="space-y-3 px-1">
+            <div>
+              <div className="text-xs font-medium text-slate-600 mb-2">Max Width</div>
+              <div className="flex items-center gap-3">
+                <input
+                  type="range"
+                  min={0}
+                  max={1200}
+                  step={50}
+                  value={node.props.maxWidth ?? 0}
+                  onChange={(e) => updateNodeProps(node.id, { maxWidth: Number(e.target.value) })}
+                  className="flex-1 h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
+                />
+                <input
+                  type="number"
+                  value={node.props.maxWidth ?? 0}
+                  onChange={(e) => updateNodeProps(node.id, { maxWidth: Number(e.target.value) })}
+                  className="w-16 px-2 py-1 text-xs border border-slate-200 rounded text-right"
+                />
+                <span className="text-xs text-slate-400">px</span>
+              </div>
+              <p className="text-xs text-slate-500 mt-1">0 = full width, 640px recommended for paragraphs</p>
+            </div>
+
             <div>
               <div className="text-xs font-medium text-slate-600 mb-2">Padding</div>
               <div className="grid grid-cols-2 gap-2">
@@ -277,6 +315,42 @@ export function TextPanelSimple({ node }: { node: ElementNode }) {
                   className="flex-1 h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
                 />
                 <span className="text-xs text-slate-500 w-10 text-right">{node.props.borderRadius ?? 0}px</span>
+              </div>
+            </div>
+
+            <SelectField
+              label="Semantic Tag"
+              value={node.props.semanticTag ?? (kind === "heading" ? "h1" : kind === "subheading" ? "h2" : "p")}
+              options={[
+                { label: "<h1>", value: "h1" },
+                { label: "<h2>", value: "h2" },
+                { label: "<h3>", value: "h3" },
+                { label: "<h4>", value: "h4" },
+                { label: "<h5>", value: "h5" },
+                { label: "<h6>", value: "h6" },
+                { label: "<p>", value: "p" },
+                { label: "<div>", value: "div" },
+                { label: "<span>", value: "span" },
+              ]}
+              onChange={(v) => updateNodeProps(node.id, { semanticTag: v })}
+            />
+
+            <div>
+              <div className="text-xs font-medium text-slate-600 mb-2">Text Decoration</div>
+              <div className="grid grid-cols-3 gap-1">
+                {['none', 'underline', 'line-through'].map((decoration) => (
+                  <button
+                    key={decoration}
+                    onClick={() => updateNodeProps(node.id, { textDecoration: decoration })}
+                    className={`h-8 rounded border text-xs capitalize transition-all ${
+                      (node.props.textDecoration ?? 'none') === decoration
+                        ? 'border-blue-500 bg-blue-50 text-blue-700'
+                        : 'border-slate-200 hover:border-slate-300 text-slate-600'
+                    }`}
+                  >
+                    {decoration === 'line-through' ? 'Strike' : decoration}
+                  </button>
+                ))}
               </div>
             </div>
           </div>

@@ -37,21 +37,6 @@ export function ImagePanel({ node }: { node: ElementNode }) {
         <SectionHeader title="Source" section="source" />
         {openSections.source && (
           <div className="space-y-3 px-1">
-            {/* Image Preview */}
-            <div className="rounded-lg border border-slate-200 p-2 bg-slate-50">
-              {node.props.src ? (
-                <img
-                  src={node.props.src}
-                  alt={node.props.alt || "Image preview"}
-                  className="w-full h-auto rounded"
-                  style={{ maxHeight: 150, objectFit: "cover" }}
-                />
-              ) : (
-                <div className="flex items-center justify-center h-24 bg-slate-100 rounded text-slate-400 text-xs">
-                  No image
-                </div>
-              )}
-            </div>
             <div>
               <div className="text-xs font-medium text-slate-600 mb-2">Image URL</div>
               <input
@@ -243,9 +228,32 @@ export function ImagePanel({ node }: { node: ElementNode }) {
               <div className="grid grid-cols-2 gap-2">
                 <NumberField label="Top" value={node.props.marginTop ?? 0} min={-80} max={200} onChange={(v) => updateNodeProps(node.id, { marginTop: v })} />
                 <NumberField label="Bottom" value={node.props.marginBottom ?? 0} min={-80} max={200} onChange={(v) => updateNodeProps(node.id, { marginBottom: v })} />
-                <NumberField label="Left" value={node.props.marginLeft ?? 0} min={-80} max={200} onChange={(v) => updateNodeProps(node.id, { marginLeft: v })} />
-                <NumberField label="Right" value={node.props.marginRight ?? 0} min={-80} max={200} onChange={(v) => updateNodeProps(node.id, { marginRight: v })} />
               </div>
+            </div>
+            <div>
+              <div className="text-xs font-medium text-slate-600 mb-2">Gap to Next Element</div>
+              <div className="flex items-center gap-3">
+                <input
+                  type="range"
+                  min={0}
+                  max={100}
+                  value={node.props.gapToNext ?? 0}
+                  onChange={(e) => updateNodeProps(node.id, { gapToNext: Number(e.target.value) })}
+                  className="flex-1 h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
+                />
+                <span className="text-xs text-slate-500 w-10 text-right">{node.props.gapToNext ?? 0}px</span>
+              </div>
+            </div>
+            <div>
+              <div className="text-xs font-medium text-slate-600 mb-2">Box Shadow</div>
+              <input
+                type="text"
+                value={node.props.boxShadow ?? ''}
+                onChange={(e) => updateNodeProps(node.id, { boxShadow: e.target.value })}
+                placeholder="e.g., 0 25px 50px rgba(0,0,0,0.25)"
+                className="w-full px-3 py-2 text-xs border border-slate-200 rounded-lg font-mono"
+              />
+              <p className="text-xs text-slate-500 mt-1">CSS box-shadow value</p>
             </div>
           </div>
         )}

@@ -204,6 +204,21 @@ export function TextPanel({ node }: { node: ElementNode }) {
               min={-80}
               max={200}
             />
+
+            <div>
+              <div className="text-xs font-medium text-slate-600 mb-2">Gap to Next Element</div>
+              <div className="flex items-center gap-3">
+                <input
+                  type="range"
+                  min={0}
+                  max={100}
+                  value={node.props.gapToNext ?? 0}
+                  onChange={(e) => updateNodeProps(node.id, { gapToNext: Number(e.target.value) })}
+                  className="flex-1 h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
+                />
+                <span className="text-xs text-slate-500 w-10 text-right">{node.props.gapToNext ?? 0}px</span>
+              </div>
+            </div>
           </div>
         )}
       </div>

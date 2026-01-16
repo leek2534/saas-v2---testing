@@ -256,6 +256,20 @@ export function ButtonPanel({ node }: { node: ElementNode }) {
                 <NumberField label="Bottom" value={node.props.marginBottom ?? 0} min={-80} max={200} onChange={(v) => updateNodeProps(node.id, { marginBottom: v })} />
               </div>
             </div>
+            <div>
+              <div className="text-xs font-medium text-slate-600 mb-2">Gap to Next Element</div>
+              <div className="flex items-center gap-3">
+                <input
+                  type="range"
+                  min={0}
+                  max={100}
+                  value={node.props.gapToNext ?? 0}
+                  onChange={(e) => updateNodeProps(node.id, { gapToNext: Number(e.target.value) })}
+                  className="flex-1 h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
+                />
+                <span className="text-xs text-slate-500 w-10 text-right">{node.props.gapToNext ?? 0}px</span>
+              </div>
+            </div>
             <div className="flex items-center justify-between pt-2">
               <span className="text-xs font-medium text-slate-600">Full Width</span>
               <input
@@ -279,12 +293,12 @@ export function ButtonPanel({ node }: { node: ElementNode }) {
                 <span className="text-xs font-medium text-slate-600">Shadow</span>
                 <input
                   type="checkbox"
-                  checked={node.props.shadow !== 'none'}
+                  checked={node.props.shadow !== 'none' && node.props.shadow !== undefined}
                   onChange={(e) => updateNodeProps(node.id, { shadow: e.target.checked ? 'md' : 'none' })}
                   className="w-4 h-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500"
                 />
               </div>
-              {node.props.shadow !== 'none' && (
+              {node.props.shadow !== 'none' && node.props.shadow !== undefined && (
                 <div className="grid grid-cols-3 gap-1">
                   {['sm', 'md', 'lg'].map((size) => (
                     <button
@@ -301,6 +315,17 @@ export function ButtonPanel({ node }: { node: ElementNode }) {
                   ))}
                 </div>
               )}
+            </div>
+            <div>
+              <div className="text-xs font-medium text-slate-600 mb-2">Custom Box Shadow</div>
+              <input
+                type="text"
+                value={node.props.boxShadow ?? ''}
+                onChange={(e) => updateNodeProps(node.id, { boxShadow: e.target.value })}
+                placeholder="e.g., 0 10px 25px rgba(0,0,0,0.1)"
+                className="w-full px-3 py-2 text-xs border border-slate-200 rounded-lg font-mono"
+              />
+              <p className="text-xs text-slate-500 mt-1">CSS box-shadow value</p>
             </div>
             <div>
               <div className="text-xs font-medium text-slate-600 mb-2">Opacity</div>

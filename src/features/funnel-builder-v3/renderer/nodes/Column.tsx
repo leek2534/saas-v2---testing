@@ -51,9 +51,8 @@ function EmptyColumnPlaceholder({ columnId, isDragging, onSelect }: { columnId: 
         backgroundColor: isActive ? 'rgba(59, 130, 246, 0.1)' : (isOver && isDragging ? 'rgba(59, 130, 246, 0.1)' : 'transparent'),
         boxShadow: isActive ? '0 0 0 3px rgba(59, 130, 246, 0.2)' : undefined
       }}
-      onMouseDown={(e) => {
+      onClick={(e) => {
         e.stopPropagation();
-        e.preventDefault();
         select(columnId);
         onSelect();
       }}
@@ -110,7 +109,7 @@ export function Column({ node, render }: { node: ColumnNode; render: (id: string
         border: "none",
         boxShadow: "none",
       }}
-      onMouseDown={(e) => {
+      onClick={(e) => {
         if (isPreview) return;
         
         // Don't select column if clicking on an element

@@ -16,7 +16,7 @@ import { NumberField, SelectField, ToggleField, TextField } from "./controls";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { TextPanelWrapper } from "./panels/TextPanelWrapper";
+import { TextPanelSimple } from "./panels/TextPanelSimple";
 
 export function InspectorOpen() {
   const tree = useFunnelEditorStore((s) => s.tree);
@@ -403,22 +403,15 @@ if (selectedPopup) {
     const el = n as ElementNode;
     const kind = el.props.kind;
 
-    // TextSettingsPanel has its own header, return it directly
-    const isTextElement = kind === "heading" || kind === "subheading" || kind === "paragraph" || kind === "text";
-    if (isTextElement) {
-      return (
-        <TextPanelWrapper
-          node={el}
-          breadcrumbs={breadcrumbs}
-          onBreadcrumbClick={(id: string) => select(id)}
-          onCollapse={handleClose}
-        />
-      );
-    }
-
     let elementPanel: React.ReactNode = null;
 
     switch (kind) {
+      case "heading":
+      case "subheading":
+      case "paragraph":
+      case "text":
+        elementPanel = <TextPanelSimple node={el} />;
+        break;
       case "video":
         elementPanel = <VideoPanel node={el} />;
         break;
